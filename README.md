@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 Oxie AI Assistant — FE-08 Checkpoint 1
 
-## Getting Started
+Welcome to **Oxie AI Assistant**, a state-of-the-art AI chat application built with **Next.js 16 (App Router)**, **AI SDK v7**, **Tailwind CSS**, and **OpenRouter API streaming**.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🌟 Live Preview & Testing URL
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Live Local URL:** [http://localhost:3000/chat](http://localhost:3000/chat)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## ⚡ How to Test Failure States in the Web UI
 
-## Learn More
+We have built an interactive **FE-08 Test Failures Toolbar** directly into the Web UI header at `http://localhost:3000/chat`. This allows reviewers, mentors, and developers to test all edge cases with **1 click**:
 
-To learn more about Next.js, take a look at the following resources:
+### 1. ⚡ Normal (200) — Happy Path
+- **Action:** Select `Normal (200)`, type a question (e.g. *"What is Quantum Computing?"*), and click Send.
+- **Result:** Response streams token-by-token in a dark `#161a22` card with Copy, Like, Dislike, and local timestamp actions.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 2. ⚡ 429 Rate Limit
+- **Action:** Click `429 Rate Limit` in the top test toolbar, then click Send.
+- **Result:** Displays a styled error banner: *"You've hit the rate limit. Please wait a moment and try again."* with a working **Retry** button.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 3. ⚡ Mid-Stream Error
+- **Action:** Click `Mid-Stream Error` in the top test toolbar, then click Send.
+- **Result:** Streams initial tokens before interrupting cleanly with an inline error banner: *"The response was interrupted mid-stream. Retry to continue."* Partial stream text is safely preserved.
 
-## Deploy on Vercel
+### 4. ⚡ 500 Server Error
+- **Action:** Click `500 Server Error` in the top test toolbar, then click Send.
+- **Result:** Displays an error banner: *"The server encountered an error. Please try again."* with a working **Retry** button.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 5. ⚡ Slow Latency
+- **Action:** Click `Slow Latency` in the top test toolbar, then click Send.
+- **Result:** 3-second artificial delay while demonstrating the animated Lottie thinking skeleton indicator without layout shift (CLS = 0).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 🎨 Theme & Typography Design System
+
+- **Dark Theme Engine:** `next-themes` with `defaultTheme="dark"`.
+- **Text Palette Standard:**
+  - **Primary Headings & Content:** Pure `text-white` (`#ffffff`).
+  - **Subtext & Muted Labels:** `text-white/60` (60% white opacity).
+  - **Zero Gray Text:** strictly no `text-slate-400`, `text-slate-500`, or gray variants.
+
+---
+
+## 📦 Tech Stack
+- **Framework:** Next.js 16.2.12 (Turbopack)
+- **AI Engine:** Vercel AI SDK v7 (`useChat`, `DefaultChatTransport`, `streamText`)
+- **LLM Provider:** OpenRouter (`google/gemma-4-26b-a4b-it:free`)
+- **Icons:** React Icons (`bi`, `fi`, `md`, `pi`, `tb`, `vsc`, `gr`, `lia`, `ri`, `lu`, `fa`)
